@@ -4,10 +4,15 @@ import { Footer } from "./Footer"
 import { ProductsIndex } from "./ProductsIndex"
 import { NewProducts } from "./NewProducts"
 import { useState, useEffect } from "react";
+import { Modal } from "./Modal"
+import { ProductsShow } from "./ProductsShow"
+
 
 
 export function ProductsPage() {
   const [products, setProducts] = useState([]);
+  const [isProductsShowVisible, setIsProductsShowVisible] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState({});
   
   const handleIndex = () => {
     console.log("handleIndex")
@@ -24,6 +29,11 @@ export function ProductsPage() {
     });
   }
 
+  const handleShow = (product) => {
+    setIsProductsShowVisible(true); 
+    setCurrentProduct(product);
+  }
+
 
 
 
@@ -32,7 +42,10 @@ export function ProductsPage() {
   return (
     <main>
       <NewProducts onCreate={handleCreate}/>
-      <ProductsIndex products={products}/> 
+      <ProductsIndex products={products} onShow={handleShow}/>
+      <Modal show={isProductsShowVisible} onClose={() => setIsProductsShowVisible(false)}>
+        <ProductsShow product={currentProduct}/>
+      </Modal> 
     </main>
   )
 }
