@@ -1,9 +1,7 @@
 export function Header() {
   return (
     <header>
-      <nav>
-        <a href="#">Home</a> | <a href="#">Link</a>
-      </nav>
+      <a href="#">Home</a> | <a href="all-projects">All Projects</a> | <a href="new-projects">New Projects</a>
     </header>
-  )
+  );
 }
