@@ -1,4 +1,12 @@
 export function ProductsShow({product}) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const params = new FormData(form);
+    const successCallback = () => form.reset();
+    onUpdate(product, params, successCallback);
+  }
+
   return (
     <div>
       <h1>Product Information</h1>
@@ -6,6 +14,21 @@ export function ProductsShow({product}) {
       <p>Price: {product.price}</p>
       <p>Description: {product.description}</p>
       <p>Supplier ID: {product.supplier_id}</p>
+      <form onSubmit={handleSubmit}>
+        <div>
+          Name: <input defaultValue={product.name} name="name" type="text" />
+        </div>
+        <div>
+          Price: <input defaultValue={product.price} name="price" type="integer" />
+        </div>
+        <div>
+          Description: <input defaultValue={product.description} name="description" type="text" />
+        </div>
+        <div>
+          Supplier ID: <input defaultValue={product.supplier_id} name="supplier_id" type="integer" />
+        </div>
+        <button type="submit">Update</button>
+      </form>
     </div>
   );
 }
