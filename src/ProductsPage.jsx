@@ -42,6 +42,14 @@ export function ProductsPage() {
     });
   }
 
+  const handleDestroy = (product) => {
+    axios.delete(`http://localhost:3000/products/${product.id}.json`).then((response) => {
+      setProducts(products.map(p => p.id === response.data.id ? response.data : p ));
+      successCallback();
+      setIsProductsShowVisible(false); 
+    });
+  }
+
 
 
 
@@ -52,7 +60,7 @@ export function ProductsPage() {
       <NewProducts onCreate={handleCreate}/>
       <ProductsIndex products={products} onShow={handleShow}/>
       <Modal show={isProductsShowVisible} onClose={() => setIsProductsShowVisible(false)}>
-        <ProductsShow product={currentProduct} onUpdate={handleUpdate}/>
+        <ProductsShow product={currentProduct} onUpdate={handleUpdate} onDestroy={handleDestroy}/>
       </Modal> 
     </main>
   )
