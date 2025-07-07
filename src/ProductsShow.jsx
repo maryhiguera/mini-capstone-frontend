@@ -7,6 +7,7 @@ export function ProductsShow({product, onUpdate, onDestroy}) {
     onUpdate(product, params, successCallback);
   }
 
+
   return (
     <div>
       <h1>Product Information</h1>

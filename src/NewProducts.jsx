@@ -1,4 +1,5 @@
-export function NewProducts() {
+
+export function NewProducts({onCreate}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -11,19 +12,26 @@ export function NewProducts() {
     <div>
       <h1>New Product</h1>
       <form onSubmit={handleSubmit}>
-          <div>
-            Name: <input name="name" type="text" />
+          <div className="form-floating mb-3">
+            <input type="text" className="form-control" id="floatingInput" placeholder="name"/>
+            <label htmlFor="floatingInput">Name of Product:</label>
           </div>
-          <div>
-            Price: <input name="price" type="integer"/>
+          <div className="form-floating mb-3">
+            <input type="integer" className="form-control" id="floatingInput" placeholder="price"/>
+            <label htmlFor="floatingInput">Price:</label>
           </div>
-          <div>
-            Description: <input name="description" type="text"/>
+          <div className="form-floating mb-3">
+            <textarea className="form-control" placeholder="Leave description here" id="floatingTextarea2" style={{height: "100px"}}></textarea>
+            <label htmlFor="floatingTextarea2">Description:</label>
           </div>
-          <div>
-            Supplier ID: <input name="supplier_id" type="integer"/>
+          <div className="form-floating mp-3">
+            <input type="integer" className="form-control" id="floatingInput"placeholder="supplier_id"/>
+            <label htmlFor="floatingInput">Supplier ID:</label>
           </div>
-          <button type="submit">Create</button>
+          <div className="d-grid gap-2 col-4 mx-auto">
+            <button className="btn btn-primary" type="button">Create New Product</button>
+          </div>
+          {/* <button type="submit">Create</button> */}
       </form>
     </div>
   );
