@@ -14,6 +14,7 @@ import { NewProducts } from "./NewProducts";
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
+axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "<your-backend-url>";
 
 function Layout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
