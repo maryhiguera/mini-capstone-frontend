@@ -12,7 +12,9 @@ import { OrderPage } from "./OrderPage";
 import { NewProducts } from "./NewProducts";
 
 
-axios.defaults.baseURL = "http://localhost:3000";
+
+
+// axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://mini-capstone-api-maca.onrender.com";
 
@@ -35,7 +37,7 @@ function Layout() {
 
     const handleCartIndex = () => {
     console.log("handleCartIndex");
-    axios.get("http://localhost:3000/carted_products.json").then((response) => {
+    axios.get("/carted_products.json").then((response) => {
       console.log("Cart items:", response.data);
       setCartItems(response.data);
     }).catch((error) => {
@@ -45,7 +47,7 @@ function Layout() {
 
   const handleAddToCart = (product) => {
     console.log("handleAddToCart", product);
-    axios.post("http://localhost:3000/carted_products.json", {
+    axios.post("/carted_products.json", {
       product_id: product.id,
       quantity: 1
     }).then((response) => {
@@ -58,7 +60,7 @@ function Layout() {
 
   const handleRemoveFromCart = (cartedProduct) => {
     console.log("handleRemoveFromCart", cartedProduct);
-    axios.delete(`http://localhost:3000/carted_products/${cartedProduct.id}.json`).then((response) => {
+    axios.delete(`/carted_products/${cartedProduct.id}.json`).then((response) => {
       console.log("Removed from cart:", response.data);
       handleCartIndex(); // Refresh cart after removing
     }).catch((error) => {
@@ -87,10 +89,10 @@ const router = createBrowserRouter([
   {
     element: <Layout/>,
     children: [
-      {
-        path: "/",
-        element: <ProductsPage />
-      }, 
+      // {
+      //   path: "/",
+      //   element: <ProductsPage />
+      // }, 
       {
         path: "/cart",
         element: <CartPage/>
@@ -102,6 +104,10 @@ const router = createBrowserRouter([
       {
         path: "/productnew",
         element: <NewProducts/>
+      },
+      {
+        path: "productsindex",
+        element: <ProductsIndex/>
       },
       {
         path: "/signup",

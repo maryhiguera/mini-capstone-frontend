@@ -4,7 +4,7 @@ import { LogoutLink } from "./LogoutLink";
 export function Header({ isLoggedIn, setIsLoggedIn }) {
   return (
     <header>
-      <nav className="nav justify-content-center">
+      <nav>
         <div>
           <Link to="/">Mini Capstone</Link> |
             {isLoggedIn ? (

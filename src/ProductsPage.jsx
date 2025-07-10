@@ -23,14 +23,14 @@ export function ProductsPage() {
 
   const handleIndex = () => {
     console.log("handleIndex")
-    axios.get("http://localhost:3000/products.json").then((response) => {
+    axios.get("/products.json").then((response) => {
       console.log(response.data);
       setProducts(response.data);
     })
   }
 
   const handleCreate = (params, successCallback) => {
-    axios.post("http://localhost:3000/products.json", params).then((response) => {
+    axios.post("/products.json", params).then((response) => {
       setProducts([...products, response.data]);
       successCallback();
     });
@@ -42,7 +42,7 @@ export function ProductsPage() {
   }
 
   const handleUpdate = (product, params, successCallback) => {
-    axios.patch(`http://localhost:3000/products/${product.id}.json`, params).then((response) => {
+    axios.patch(`/products/${product.id}.json`, params).then((response) => {
       setProducts(products.map(p => p.id === response.data.id ? response.data : p));
       successCallback();
       setIsProductsShowVisible(false);
@@ -50,7 +50,7 @@ export function ProductsPage() {
   }
 
   const handleDestroy = (product) => {
-    axios.delete(`http://localhost:3000/products/${product.id}.json`).then((response) => {
+    axios.delete(`/products/${product.id}.json`).then((response) => {
       setProducts(products.filter((p) => p.id !== product.id));
       setIsProductsShowVisible(false); 
     });
@@ -62,7 +62,7 @@ export function ProductsPage() {
     <main className='container'>
       <Header/>
       {/* <NewProducts onCreate={handleCreate}/> */}
-      <ProductsIndex products={products} onShow={handleShow} onAddToCart={onAddToCart}/>
+      {/* <ProductsIndex products={products} onShow={handleShow} onAddToCart={onAddToCart}/> */}
       <Modal show={isProductsShowVisible} onClose={() => setIsProductsShowVisible(false)}>
         <ProductsShow product={currentProduct} onUpdate={handleUpdate} onDestroy={handleDestroy}/>
       </Modal> 

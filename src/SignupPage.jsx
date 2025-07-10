@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export function SignupPage() {
   const [errors, setErrors] = useState([]);
+  const [name, setName] = useState([]);
   const navigate = useNavigate(); 
 
   const handleSubmit = (event) => {
@@ -11,7 +12,7 @@ export function SignupPage() {
     setErrors([]);
     const params = new FormData(event.target);
     axios
-      .post("http://localhost:3000/signup", params)
+      .post("/signup", params)
       .then((response) => {
         console.log(response.data);
         event.target.reset();
@@ -33,7 +34,8 @@ export function SignupPage() {
       </ul>
       <form onSubmit={handleSubmit}>
         <div>
-          Name: <input name="name" type="text" />
+          Name: <input name="name" type="text" value={name} onChange={(event) => setName(event.target.value.slice(0, 20))}/>
+          <small>{20 - name.length} characters remaining</small>
         </div>
         <div>
           Email: <input name="email" type="email" />

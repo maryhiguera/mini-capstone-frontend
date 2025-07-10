@@ -6,7 +6,7 @@ export function CartPage() {
 
   const handleCreateOrder = () => {
     console.log("handleCreateOrder");
-    axios.get("http://localhost:3000/orders.json").then((response) => {
+    axios.get("/orders.json").then((response) => {
       console.log("Order created:", response.data);
       navigate("/orders");
     })
